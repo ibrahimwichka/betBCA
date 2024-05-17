@@ -6,4 +6,4 @@ Material(app)
 
 @app.route('/')
 def index():
-    return "betBCA App"
+    return render_template("index.html")

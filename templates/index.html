@@ -1,0 +1,28 @@
+{% extends "material/base.html" %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/styles.css">
+
+<div class = "app_home">
+    <nav>
+        <div class="nav-wrapper grey darken-4">
+          <a href="#" class="brand-logo center custom-nav-header">  betBCA </a>
+          <ul id="nav-mobile-home" class="left hide-on-med-and-down">
+            <li><a href="{{url_for('index')}}"><i class="material-icons">home</i></a></li>
+          </ul>
+        </div>
+    </nav>
+</div>
+
+
+{% endblock%}
+
+{% block scripts %}
+{{super()}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+<script src = "/static/js/script.js"></script>
+
+{% endblock %}
