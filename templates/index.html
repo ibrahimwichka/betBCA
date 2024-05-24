@@ -1,25 +1,45 @@
-{% extends "material/base.html" %}
-{% block content %}
-
-<div class = "app_home">
+{% extends "material/base.html" %} {% block content %}
+<main>
+  <header>
     <nav>
-        <div class="nav-wrapper grey darken-4">
-          <a href="#" class="brand-logo center custom-nav-header">  betBCA </a>
-          <ul id="nav-mobile-home" class="left hide-on-med-and-down">
-            <li><a href="{{url_for('index')}}"><i class="material-icons">home</i></a></li>
-          </ul>
-        </div>
+      <div class="nav-wrapper black">
+        <a
+          href="#"
+          data-target="slide-out"
+          class="sidenav-trigger show-on-medium-and-up"
+          ><i class="material-icons">menu</i></a
+        >
+        <a href="#" class="brand-logo center">betBCA</a>
+      </div>
     </nav>
-</div>
+  </header>
 
+  <div class="container">
+  </div>
+</main>
 
-{% endblock%}
+<ul id="slide-out" class="sidenav">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="static/img/side-nav.jpeg" />
+      </div>
+      <a href="#user"><img class="circle" src="static/img/sample_blank_profile.png" /></a>
+    </div>
+  </li>
+  <li>
+    <a href="#!"><i class="material-icons">attach_money</i>Search Bets</a>
+  </li>
+  <li><a href="#!"><i class="material-icons">folder_special</i>Your Bets</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="waves-effect"><i class="material-icons">person</i>Profile</a></li>
+  <li><a class=" subheader waves-effect" href="#!"><i class="material-icons">forward</i>Sign Out</a></li>
+</ul>
 
-{% block scripts %}
-{{super()}}
+{% endblock %} {% block scripts %} {{ super() }}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
-<script src = "/static/js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/static/js/script.js"></script>
 
 {% endblock %}
