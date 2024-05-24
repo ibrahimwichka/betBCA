@@ -1,14 +1,23 @@
-from flask import Flask, render_template, url_for, request
-from flask_material import Material
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template
+import flask_material
+from config import Config
+from db.models import db, User, Bet, Topic
 
-app = Flask(__name__)
-Material(app)
+def create_app():
+    app = Flask(__name__, template_folder='templates')
+    app.config.from_object(Config)
+    
+    db.init_app(app)
 
-@app.route('/')
-def index():
-    return render_template("index.html")
+    with app.app_context():
+        db.create_all()
 
+    @app.route('/')
+    def index():
+        return render_template("index.html")
 
-if __name__ == '__main__':
+    return app
+
+if __name__ == "__main__":
+    app = create_app()
     app.run(debug=True)
