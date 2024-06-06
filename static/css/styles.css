@@ -16,3 +16,87 @@ main {
     transform: translateX(0%);
 }
 
+body {
+    background-image: url(https://img.freepik.com/premium-photo/glowing-digital-bitcoin-hologram-lines-blurry-dark-wide-background-cryptocurrency-online-banking-app-finance-concept-3d-rendering_670147-8067.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.brand-logo.center {
+    font-size: 2rem; 
+    font-weight: 700; 
+    color: #ffcc00;
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    letter-spacing: 1px; 
+    display: inline-block; 
+    padding-right: 140px;
+    padding-left: 140px;
+    border: 2px solid #ffcc00; 
+    border-radius: 5px; 
+    background: linear-gradient(145deg, #2c2c2c, #181818); 
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); 
+    text-decoration: none; 
+}
+
+.brand-logo.center:hover {
+    background: linear-gradient(145deg, #181818, #2c2c2c); /* Inverse gradient on hover */
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7); /* Slightly more pronounced shadow on hover */
+}
+
+
+.animated-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.animated-icon {
+  font-size: 3rem;
+  color: #e53935;
+  margin: 0 10px;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+.news-banner-container {
+    background-color: #e53935;
+    color: #ffffff;
+    padding: 10px 20px;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+.news-banner {
+    display: flex;
+    animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}
+
+.news-item {
+    white-space: nowrap;
+    margin-right: 30px;
+}
+

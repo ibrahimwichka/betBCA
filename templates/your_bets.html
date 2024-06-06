@@ -1,0 +1,58 @@
+{% extends "material/base.html" %} {% block content %}
+
+<main>
+  <header>
+    <nav>
+      <div class="nav-wrapper black">
+        <a
+          href="#"
+          data-target="slide-out"
+          class="sidenav-trigger show-on-medium-and-up"
+          ><i class="material-icons">menu</i></a
+        >
+        <a href="#" class="brand-logo center">betBCA</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card grey black"></div>
+  </div>
+</main>
+
+<ul id="slide-out" class="sidenav">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="static/imgs/bet_dol.jpeg" />
+      </div>
+      <a href="#!"
+        ><img class="circle" src="static/imgs/sample_blank_profile.png"
+      /></a>
+      <br />
+    </div>
+  </li>
+  <li>
+    <a href="{{ url_for('all_bets') }}"><i class="material-icons">attach_money</i>Search Bets</a>
+  </li>
+  <li>
+    <a href="{{ url_for('your_bets') }}"><i class="material-icons">folder_special</i>Your Bets</a>
+  </li>
+  <li><div class="divider"></div></li>
+  <li>
+    <a class="waves-effect"><i class="material-icons">person</i>{{username}}'s Profile</a>
+  </li>
+  <li>
+    <a class="waves-effect" href="{{ url_for('logout') }}"
+      ><i class="material-icons">forward</i>Sign Out</a
+    >
+  </li>
+</ul>
+
+{% endblock %} {% block scripts %} {{ super() }}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/static/js/script.js"></script>
+
+{% endblock %}
