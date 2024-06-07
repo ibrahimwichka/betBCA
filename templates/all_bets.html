@@ -1,4 +1,5 @@
-{% extends "material/base.html" %} {% block content %}
+{% extends "material/base.html" %} 
+{% block content %}
 
 <main>
   <header>
@@ -15,9 +16,6 @@
     </nav>
   </header>
 
-  <div class="container">
-    <div class="card grey black"></div>
-  </div>
 </main>
 
 <ul id="slide-out" class="sidenav">
@@ -26,17 +24,19 @@
       <div class="background">
         <img src="static/imgs/bet_dol.jpeg" />
       </div>
-      <a href="#!"
-        ><img class="circle" src="static/imgs/sample_blank_profile.png"
-      /></a>
+      <a href="#!"><img class="circle" src="static/imgs/sample_blank_profile.png" /></a>
       <br />
     </div>
   </li>
   <li>
-    <a href="{{ url_for('all_bets') }}"><i class="material-icons">attach_money</i>Search Bets</a>
+    <a href="{{ url_for('all_bets') }}"
+      ><i class="material-icons">attach_money</i>Search Bets</a
+    >
   </li>
   <li>
-    <a href="{{ url_for('your_bets') }}"><i class="material-icons">folder_special</i>Your Bets</a>
+    <a href="{{ url_for('your_bets') }}"
+      ><i class="material-icons">folder_special</i>Your Bets</a
+    >
   </li>
   <li><div class="divider"></div></li>
   <li>

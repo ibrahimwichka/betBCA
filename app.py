@@ -54,7 +54,7 @@ def create_tables():
             user_bet_id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER NOT NULL,
             bet_id INTEGER NOT NULL,
-            amount DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+            amount DECIMAL(10,2) NOT NULL,
             vote INTEGER,
             FOREIGN KEY (user_id) REFERENCES users(id),
             FOREIGN KEY (bet_id) REFERENCES bets(bet_id)
@@ -86,7 +86,7 @@ insert_data()
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('index.html', logged_in=True, username=session['username'])
+        return render_template('your_bets.html', logged_in=True, username=session['username'])
     else:
         return render_template('index.html')
 
