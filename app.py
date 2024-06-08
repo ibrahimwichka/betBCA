@@ -73,8 +73,8 @@ def insert_data():
     cursor.execute('''
         INSERT INTO bets('bet_topic', 'choice1', 'choice2', 'odds1', 'odds2', 'result')
         VALUES 
-        ("Philadelphia Eagles vs. Kansas City Chiefs", "Eagles", "Chiefs", +200, -300, ""),
-        ("Golden State Warriors vs. Bostin Celtic", "Warriors", "Celtics", -800, +200, "")
+        ("Philadelphia Eagles vs. Kansas City Chiefs 🏈", "Eagles", "Chiefs", +200, -300, "Bet Ongoing!"),
+        ("Golden State Warriors vs. Boston Celtics 🏀", "Warriors", "Celtics", -800, +200, "Bet Ongoing!")
     ''')
     db.commit()
     db.close()
@@ -120,7 +120,27 @@ def your_bets():
 @app.route('/all_bets')
 def all_bets():
     if 'username' in session:
-        return render_template('all_bets.html', logged_in=True, username=session['username'])
+        db = get_db_connection()
+        cursor = db.cursor()
+        cursor.execute(
+            '''SELECT * FROM bets LIMIT 2'''
+        )
+        rows = cursor.fetchall()
+        bet_ids = [row['bet_id'] for row in rows]
+        bet_topics = [row['bet_topic'] for row in rows]
+        choices_1 = [row['choice1'] for row in rows]
+        choices_2 = [row['choice2'] for row in rows]
+        odds_1 = [row['odds1'] for row in rows]
+        odds_2 = [row['odds2'] for row in rows]
+        results = [row['result'] for row in rows]
+        
+        db.close()
+        return render_template(
+            'all_bets.html', 
+            logged_in=True, 
+            username=session['username'], 
+            bet_ids = bet_ids, bet_topics = bet_topics, choices_1 = choices_1, choices_2 = choices_2, odds_1 = odds_1, odds_2 = odds_2, results = results
+        )
     else:
         return render_template('all_bets.html')
 

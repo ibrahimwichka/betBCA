@@ -1,8 +1,11 @@
 {% extends "material/base.html" %} 
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/styles2.css">
+{% endblock %}
 {% block content %}
-
 <main>
-  <header>
+    <header>
     <nav>
       <div class="nav-wrapper black">
         <a
@@ -14,39 +17,60 @@
         <a href="#" class="brand-logo center">betBCA</a>
       </div>
     </nav>
-  </header>
-
+    </header>
+    <div class="container">
+        <div class="row">
+            <!-- Start of Bets Display -->
+            {% for index in range(bet_ids|length) %}
+            <div class="col s12 m6 l6">
+                <div class="card blue-grey darken-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">Bet #{{ bet_ids[index] }}</span>
+                        <p class = "bet-title">{{ bet_topics[index] }}</p>
+                            <ul>
+                                <li>{{ choices_1[index] }} {% if odds_1[index] > 0 %}<span class="positive-odds">(+{{ odds_1[index] }})</span>{% else %}<span class="negative-odds">({{ odds_1[index] }})</span>{% endif %}</li>
+                                <li>{{ choices_2[index] }} {% if odds_2[index] > 0 %}<span class="positive-odds">(+{{ odds_2[index] }})</span>{% else %}<span class="negative-odds">({{ odds_2[index] }})</span>{% endif %}</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Submit Bet!</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- End of Bets Display -->
+        </div>
+    </div>
 </main>
 
 <ul id="slide-out" class="sidenav">
-  <li>
-    <div class="user-view">
-      <div class="background">
-        <img src="static/imgs/bet_dol.jpeg" />
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img src="static/imgs/bet_dol.jpeg" />
+        </div>
+        <a href="#!"
+          ><img class="circle" src="static/imgs/sample_blank_profile.png"
+        /></a>
+        <br />
       </div>
-      <a href="#!"><img class="circle" src="static/imgs/sample_blank_profile.png" /></a>
-      <br />
-    </div>
-  </li>
-  <li>
-    <a href="{{ url_for('all_bets') }}"
-      ><i class="material-icons">attach_money</i>Search Bets</a
-    >
-  </li>
-  <li>
-    <a href="{{ url_for('your_bets') }}"
-      ><i class="material-icons">folder_special</i>Your Bets</a
-    >
-  </li>
-  <li><div class="divider"></div></li>
-  <li>
-    <a class="waves-effect"><i class="material-icons">person</i>Profile</a>
-  </li>
-  <li>
-    <a class="waves-effect" href="#!"
-      ><i class="material-icons">forward</i>Sign Out</a
-    >
-  </li>
+    </li>
+    <li>
+      <a href="{{ url_for('all_bets') }}"><i class="material-icons">attach_money</i>Search Bets</a>
+    </li>
+    <li>
+      <a href="{{ url_for('your_bets') }}"><i class="material-icons">folder_special</i>Your Bets</a>
+    </li>
+    <li><div class="divider"></div></li>
+    <li>
+      <a class="waves-effect"><i class="material-icons">person</i>{{username}}'s Profile</a>
+    </li>
+    <li>
+      <a class="waves-effect" href="{{ url_for('logout') }}"
+        ><i class="material-icons">forward</i>Sign Out</a
+      >
+    </li>
 </ul>
 
 {% endblock %} {% block scripts %} {{ super() }}
