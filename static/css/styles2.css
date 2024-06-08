@@ -208,3 +208,47 @@ body {
     font-size: 24px;
     color: gold;
 }
+
+.bet-modal {
+    background-color: #1e1e1e; /* Dark background */
+    color: #f0f0f0; /* Light text */
+    border-radius: 8px;
+}
+.bet-modal-content {
+    padding: 20px;
+}
+.bet-modal-header {
+    color: #ffab00; /* Gold color for header */
+    margin-bottom: 20px;
+}
+.bet-range {
+    margin: 20px 0;
+}
+.bet-amount-display {
+    font-size: 18px;
+    color: #ffffff; /* White text for the amount display */
+}
+.bet-modal-footer {
+    background-color: #333333; /* Darker footer */
+    padding: 10px;
+    text-align: center;
+}
+.modal-close {
+    background-color: #ffab00; /* Gold color for the submit button */
+    color: #1e1e1e; /* Dark text on the button */
+    border-radius: 8px;
+}
+
+.team-selection {
+    margin: 20px 0;
+}
+.team-selection label {
+    margin-right: 10px;
+}
+
+.points {
+    font-size: 1.5rem; /* Adjust the font size as needed */
+    font-weight: bold;
+    color: #FFF; /* Text color */
+    margin-right: 20px; /* Add some right margin for separation */
+}
