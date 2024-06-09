@@ -1,0 +1,254 @@
+main {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.container {
+  flex: 1;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.sidenav {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.sidenav.active {
+  transform: translateX(0%);
+}
+
+body {
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  padding: 80px;
+}
+
+.animated-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.animated-icon {
+  font-size: 3rem;
+  color: #e53935;
+  margin: 0 10px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+.animated-icon:hover {
+  animation: colorChange 1s infinite, bounce 2s infinite;
+}
+
+@keyframes colorChange {
+  0%,
+  100% {
+    color: #e53935;
+  }
+  50% {
+    color: #ffeb3b;
+  }
+}
+
+.animated-icon {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.news-banner-container {
+  background-color: #e53935; /* Maintain original background color */
+  color: #ffffff;
+  padding: 15px 20px; /* Increased padding for better spacing */
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2); /* Increased shadow for better distinction */
+  z-index: 999;
+}
+
+.news-banner {
+  display: flex;
+  animation: scroll 15s linear infinite; /* Slightly faster scroll */
+  align-items: center; /* Center align items vertically */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.news-item {
+  white-space: nowrap;
+  margin-right: 50px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.news-item::before {
+  content: "🔥";
+  margin-right: 10px;
+}
+.animated-text {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 3rem;
+  margin: 0;
+  font-size: 35px;
+  color: gold;
+}
+
+.card-title {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.btn {
+  background-color: #e53935;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.card {
+    position: relative;
+    overflow: hidden;
+    background-color: #263238; /* Darker background color */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card ul li {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: #cfd8dc; /* Light grey text */
+}
+
+.card-action {
+    background-color: #37474f; /* Darker background color for action */
+    border-top: 1px solid #455a64; /* Border color */
+    text-align: center;
+    padding: 10px;
+}
+
+.card-action a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.card-action a:hover {
+    color: #64ffda; /* Hover color */
+}
+
+.positive-odds {
+    color: #00e676; /* Green color for positive odds */
+}
+
+.negative-odds {
+    color: #ff1744; /* Red color for negative odds */
+}
+
+.bet-title {
+    font-size: 24px;
+    color: gold;
+}
+
+.bet-modal {
+    background-color: #1e1e1e; /* Dark background */
+    color: #f0f0f0; /* Light text */
+    border-radius: 8px;
+}
+.bet-modal-content {
+    padding: 20px;
+}
+.bet-modal-header {
+    color: #ffab00; /* Gold color for header */
+    margin-bottom: 20px;
+}
+.bet-range {
+    margin: 20px 0;
+}
+.bet-amount-display {
+    font-size: 18px;
+    color: #ffffff; /* White text for the amount display */
+}
+.bet-modal-footer {
+    background-color: #333333; /* Darker footer */
+    padding: 10px;
+    text-align: center;
+}
+.modal-close {
+    background-color: #ffab00; /* Gold color for the submit button */
+    color: #1e1e1e; /* Dark text on the button */
+    border-radius: 8px;
+}
+
+.team-selection {
+    margin: 20px 0;
+}
+.team-selection label {
+    margin-right: 10px;
+}
+
+.points {
+    font-size: 1.5rem; /* Adjust the font size as needed */
+    font-weight: bold;
+    color: #FFF; /* Text color */
+    margin-right: 20px; /* Add some right margin for separation */
+}

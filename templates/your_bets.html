@@ -1,0 +1,88 @@
+{% extends "material/base.html" %} 
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/styles2.css">
+{% endblock %}
+{% block content %}
+<main>
+    <header>
+    <nav>
+      <div class="nav-wrapper black">
+        <a
+          href="#"
+          data-target="slide-out"
+          class="sidenav-trigger show-on-medium-and-up"
+          ><i class="material-icons">menu</i></a
+        >
+        <a href="#" class="brand-logo center">betBCA</a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span class="points">{{ user_points }} 💵</span>
+            </li>
+        </ul>
+      </div>
+    </nav>
+    </header>
+    <div class="container">
+        <div class="row">
+            {% for bet in user_bets %}
+            <div class="col s12 m6 l6">
+                <div class="card light-green darken-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">Bet #{{ bet['bet_id'] }}</span>
+                        <p class="bet-title">{{ bet['bet_topic'] }}</p>
+                        <ul>
+                            <li>{{ bet['choice1'] }} {% if bet['odds1'] > 0 %}<span class="positive-odds">(+{{ bet['odds1'] }})</span>{% else %}<span class="negative-odds">({{ bet['odds1'] }})</span>{% endif %}</li>
+                            <li>{{ bet['choice2'] }} {% if bet['odds2'] > 0 %}<span class="positive-odds">(+{{ bet['odds2'] }})</span>{% else %}<span class="negative-odds">({{ bet['odds2'] }})</span>{% endif %}</li>
+                            </br>
+                            <li style="font-size: 24px; color: black; font-weight: bold; font-family: 'Montserrat', sans-serif;" class="center-align">
+                                Your Bet: ${{ bet['amount'] }} on {{ bet['choice1'] if bet['vote'] == 1 else bet['choice2'] }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+<ul id="slide-out" class="sidenav">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img src="static/imgs/bet_dol.jpeg" />
+        </div>
+        <a href="#!"
+          ><img class="circle" src="static/imgs/sample_blank_profile.png"
+        /></a>
+        <br />
+      </div>
+    </li>
+    <li>
+      <a href="{{ url_for('all_bets') }}"><i class="material-icons">attach_money</i>Search Bets</a>
+    </li>
+    <li>
+      <a href="{{ url_for('your_bets') }}"><i class="material-icons">folder_special</i>Your Bets</a>
+    </li>
+    <li><div class="divider"></div></li>
+    <li>
+        <a class="waves-effect"><i class="material-icons">list</i> Leaderboard</a>
+    </li>
+    <li>
+      <a class="waves-effect"><i class="material-icons">person</i>{{username}}'s Profile</a>
+    </li>
+    <li>
+      <a class="waves-effect" href="{{ url_for('logout') }}"
+        ><i class="material-icons">forward</i>Sign Out</a
+      >
+    </li>
+</ul>
+
+{% endblock %} {% block scripts %} {{ super() }}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/static/js/script.js"></script>
+
+{% endblock %}
