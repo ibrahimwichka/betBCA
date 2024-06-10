@@ -17,17 +17,18 @@
         <a href="#" class="brand-logo center">betBCA</a>
         <ul class="right hide-on-med-and-down">
             <li>
-                <span class="points">{{ user_points }} 💵</span>
+                <span class="points">{{ username }} 👤 ${{ user_points }} 💵</span>
             </li>
         </ul>
       </div>
     </nav>
     </header>
     <div class="container">
+        <h4 class = "active-past">Active Bets</h4>
         <div class="row">
             {% for bet in user_bets %}
             <div class="col s12 m6 l6">
-                <div class="card light-green darken-4">
+                <div class="card teal darken-4">
                     <div class="card-content white-text">
                         <span class="card-title">Bet #{{ bet['bet_id'] }}</span>
                         <p class="bet-title">{{ bet['bet_topic'] }}</p>
@@ -36,7 +37,7 @@
                             <li>{{ bet['choice2'] }} {% if bet['odds2'] > 0 %}<span class="positive-odds">(+{{ bet['odds2'] }})</span>{% else %}<span class="negative-odds">({{ bet['odds2'] }})</span>{% endif %}</li>
                             </br>
                             <li style="font-size: 24px; color: black; font-weight: bold; font-family: 'Montserrat', sans-serif;" class="center-align">
-                                Your Bet: ${{ bet['amount'] }} on {{ bet['choice1'] if bet['vote'] == 1 else bet['choice2'] }}
+                                Your Bet: ${{ bet['amount'] }} on {{ bet['vote']}}
                             </li>
                         </ul>
                     </div>
@@ -44,6 +45,44 @@
             </div>
             {% endfor %}
         </div>
+        <h4 class = "active-past">Past Bets</h4>
+        <div class="row">
+          {% for bet in user_bets2 %}
+          <div class="col s12 m6 l6">
+              <div class="card blue-grey darken-4">
+                  <div class="card-content white-text">
+                      <span class="card-title">Bet #{{ bet['bet_id'] }}</span>
+                      <p class="bet-title">{{ bet['bet_topic'] }}</p>
+                      <ul>
+                          <li>{{ bet['choice1'] }} {% if bet['odds1'] > 0 %}<span class="positive-odds">(+{{ bet['odds1'] }})</span>{% else %}<span class="negative-odds">({{ bet['odds1'] }})</span>{% endif %}</li>
+                          <li>{{ bet['choice2'] }} {% if bet['odds2'] > 0 %}<span class="positive-odds">(+{{ bet['odds2'] }})</span>{% else %}<span class="negative-odds">({{ bet['odds2'] }})</span>{% endif %}</li>
+                          </br>
+                          <li style = "font-weight: bold; color: gold;"> {{bet['result']}} Won! </li>
+                          {% if bet['status'] == "Active" %}
+                          <li class="accept-button-container">
+                            <form method="POST" action="{{ url_for('get_reward') }}">
+                                <input type="hidden" name="bet_id" value="{{ bet['bet_id'] }}">
+                                <input type="hidden" name="user_bet_id" value="{{ bet['user_bet_id'] }}">
+                                <button type="submit" class="waves-effect waves-light btn accept-button">Accept ${{bet['earned']}} Reward</button>
+                            </form>
+                        </li>
+                          {% else %}
+                          <li> You earned ${{bet['earned']}} from this bet! </li>
+                          {% endif %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+    <div class="news-banner-container">
+      <div class="news-banner">
+        <div class="news-item">🔔 Breaking News: betBCA Launches!</div>
+        <div class="news-item">🎉 Biggest Jackpot Won!</div>
+        <div class="news-item">💰 Special Bonus: 50% Cashback!</div>
+        <div class="news-item">🎈 Exciting Events This Weekend!</div>
+      </div>
     </div>
 </main>
 
@@ -67,10 +106,10 @@
     </li>
     <li><div class="divider"></div></li>
     <li>
-        <a class="waves-effect"><i class="material-icons">list</i> Leaderboard</a>
+        <a href = "{{url_for('leaderboard')}}" class="waves-effect"><i class="material-icons">list</i> Leaderboard</a>
     </li>
     <li>
-      <a class="waves-effect"><i class="material-icons">person</i>{{username}}'s Profile</a>
+      <a href = "{{url_for('profile')}}"class="waves-effect"><i class="material-icons">person</i>{{username}}'s Profile</a>
     </li>
     <li>
       <a class="waves-effect" href="{{ url_for('logout') }}"

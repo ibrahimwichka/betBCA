@@ -144,137 +144,128 @@ body {
   transition: background-color 0.3s ease;
 }
 .card {
-    position: relative;
-    overflow: hidden;
-    background-color: #263238; /* Darker background color */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background-color: #263238; /* Darker background color */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
 .card-content {
-    padding: 20px;
+  padding: 20px;
 }
 
 .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .card ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .card ul li {
-    margin-bottom: 5px;
-    font-size: 1.2rem;
-    color: #cfd8dc; /* Light grey text */
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: #cfd8dc; /* Light grey text */
 }
 
 .card-action {
-    background-color: #37474f; /* Darker background color for action */
-    border-top: 1px solid #455a64; /* Border color */
-    text-align: center;
-    padding: 10px;
+  background-color: #37474f; /* Darker background color for action */
+  border-top: 1px solid #455a64; /* Border color */
+  text-align: center;
+  padding: 10px;
 }
 
 .card-action a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .card-action a:hover {
-    color: #64ffda; /* Hover color */
+  color: #64ffda; /* Hover color */
 }
-
-.positive-odds {
-    color: #00e676; /* Green color for positive odds */
-}
-
-.negative-odds {
-    color: #ff1744; /* Red color for negative odds */
-}
-
-.bet-title {
-    font-size: 24px;
-    color: gold;
-}
-
-.bet-modal {
-    background-color: #1e1e1e; /* Dark background */
-    color: #f0f0f0; /* Light text */
-    border-radius: 8px;
-}
-.bet-modal-content {
-    padding: 20px;
-}
-.bet-modal-header {
-    color: #ffab00; /* Gold color for header */
-    margin-bottom: 20px;
-}
-.bet-range {
-    margin: 20px 0;
-}
-.bet-amount-display {
-    font-size: 18px;
-    color: #ffffff; /* White text for the amount display */
-}
-.bet-modal-footer {
-    background-color: #333333; /* Darker footer */
-    padding: 10px;
-    text-align: center;
-}
-.modal-close {
-    background-color: #ffab00; /* Gold color for the submit button */
-    color: #1e1e1e; /* Dark text on the button */
-    border-radius: 8px;
-}
-
-.team-selection {
-    margin: 20px 0;
-}
-.team-selection label {
-    margin-right: 10px;
-}
-
-.points {
-    font-size: 1.2rem; /* Adjust the font size as needed */
-    font-weight: bold;
-    color: #FFF; /* Text color */
-    margin-right: 20px; /* Add some right margin for separation */
-}
-
-.active-past {
-  background-color: #757575; 
-  color: black;
-  padding: 20px;
-  font-size: 22px;
-  border-radius: 10px;
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-}
-
 .brand-logo {
   font-size: 2.5rem; /* Increase font size */
-  font-family: 'Montserrat', sans-serif; /* Custom font */
+  font-family: "Montserrat", sans-serif; /* Custom font */
   font-weight: bold; /* Make it bold */
   color: #ffeb3b; /* Custom color */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Add shadow for depth */
 }
 
-.accept-button {
-  background-color: red;
+.leaderboard-container {
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+.leaderboard-header {
+    background-color: #ffeb3b;
+    color: black;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+.leaderboard h2 {
+    color: gold;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.leaderboard ul {
+    list-style: none;
+    padding: 0;
+}
+.leaderboard li {
+    background: #2c3e50;
+    margin: 10px 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+.leaderboard li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.leaderboard li.highlight {
+    background: #f1c40f;
+    color: #2c3e50;
+    font-weight: bold;
+}
+.rank {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.user-name {
+    flex-grow: 1;
+    font-weight: bold;
+    color: white;
+}
+.points {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2ecc71;
 }
 
-
+.lead-head {
+    font-size: 22px;
+    font-weight: bold;
+    color: gold;
+}
