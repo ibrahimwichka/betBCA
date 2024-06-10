@@ -17,7 +17,7 @@
         <a href="#" class="brand-logo center">betBCA</a>
         <ul class="right hide-on-med-and-down">
             <li>
-                <span class="points">{{ username }} 👤 ${{ user_points }} 💵</span>
+                <span class="points"> {{ username }} 👤 &nbsp;&nbsp; {{ level }}&nbsp;&nbsp; ${{ user_points }} 💵</span>
             </li>
         </ul>
       </div>
@@ -65,7 +65,7 @@
                                 <input type="hidden" name="user_bet_id" value="{{ bet['user_bet_id'] }}">
                                 <button type="submit" class="waves-effect waves-light btn accept-button">Accept ${{bet['earned']}} Reward</button>
                             </form>
-                        </li>
+                          </li>
                           {% else %}
                           <li> You earned ${{bet['earned']}} from this bet! </li>
                           {% endif %}

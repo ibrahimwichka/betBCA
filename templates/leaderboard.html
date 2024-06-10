@@ -26,7 +26,7 @@
                 <li class="{% if user['id'] == current_user_id %}highlight{% endif %}">
                     <span class="rank">{{ loop.index }}</span>
                     <span class="user-name">{{ user['username'] }}</span>
-                    <span class="points">{{ user['points'] }} 💵</span>
+                    <span class="points"> {{user['points']}} 💵 </span>
                 </li>
                 {% endfor %}
             </ul>

@@ -49,6 +49,7 @@ def your_bets():
         cursor.execute('''SELECT points FROM users WHERE username = ?''', (session['username'],))
         user_points = cursor.fetchone()['points']
 
+
         cursor.execute('''
             SELECT ub.user_bet_id, ub.amount, ub.vote, b.bet_id, b.bet_topic, b.choice1, b.choice2, b.odds1, b.odds2, b.result
             FROM user_bets ub
@@ -69,16 +70,19 @@ def your_bets():
         for bet in user_bets2:
             if (bet['status'] == "Active"):
                 if (bet['result'] == bet['vote']):
-                    if (bet['result'] == "choice1"):
+                    print(bet['result'])
+                    print(bet['amount'])
+                    print(bet['odds1'])
+                    if (bet['result'] == bet['choice1']):
                         if (bet['odds1'] > 0):
                             earned_a = bet['amount'] + (bet['amount']/100) * bet['odds1']
                         else:
-                            earned_a =  bet['amount'] + (bet['amount']/bet['odds1']) * 100
+                            earned_a =  bet['amount'] + (bet['amount']/abs(bet['odds1'])) * 100
                     else:
                         if (bet['odds2'] > 0):
                             earned_a =  bet['amount'] + (bet['amount']/100) * bet['odds2']
                         else:
-                            earned_a = bet['amount'] + (bet['amount']/bet['odds2']) * 100
+                            earned_a = bet['amount'] + (bet['amount']/ abs(bet['odds2'])) * 100
                     earned_a = round(earned_a, 2)
                     cursor.execute('UPDATE user_bets SET earned = ? WHERE user_bet_id = ?', (earned_a, bet['user_bet_id']))
         
@@ -89,10 +93,21 @@ def your_bets():
             WHERE ub.user_id = ? and b.result != "Bet Ongoing!"
         ''', (session['user_id'],))
         user_bets2 = cursor.fetchall()
+        
+        if (user_points < 100):
+            level = "Beginner Level 😬"
+        elif (user_points <=200):
+            level = "Pretty good guesser 🤓"
+        elif (user_points <= 400):
+            level = "A fire better 🔥 🔥"
+        elif (user_points <= 700):
+            level = "Elite Level 💎"
+        else:
+            level = "Legendary 🦄"
         db.commit()
         db.close()
         
-        return render_template('your_bets.html', logged_in=True, username=session['username'], user_points = user_points, user_bets= user_bets, user_bets2 = user_bets2)
+        return render_template('your_bets.html', logged_in=True, username=session['username'], user_points = user_points, level = level, user_bets= user_bets, user_bets2 = user_bets2)
     else:
         return render_template('your_bets.html')
 
@@ -115,12 +130,22 @@ def all_bets():
 
         cursor.execute('''SELECT points FROM users WHERE username = ?''', (session['username'],))
         user_points = cursor.fetchone()['points']
-        
+        if (user_points < 100):
+            level = "Beginner Level 😬"
+        elif (user_points <=200):
+            level = "Pretty good guesser 🤓"
+        elif (user_points <= 400):
+            level = "A fire better 🔥 🔥"
+        elif (user_points <= 700):
+            level = "Elite Level 💎"
+        else:
+            level = "Legendary 🦄"
+
         db.close()
         return render_template(
             'all_bets.html', 
             logged_in=True, 
-            username=session['username'], user_points=user_points,
+            username=session['username'], user_points=user_points, level = level,
             bet_ids = bet_ids, bet_topics = bet_topics, choices_1 = choices_1, choices_2 = choices_2, odds_1 = odds_1, odds_2 = odds_2, results = results
         )
     else:
@@ -176,6 +201,7 @@ def get_reward():
 
         cursor.execute('UPDATE users SET points = ? WHERE username = ?', (user_points+amount, session['username']))
         cursor.execute('UPDATE user_bets SET status = "redeemed" WHERE user_bet_id = ?', (user_bet_id_get,))
+
         db.commit()
         db.close()
         return redirect('your_bets')
