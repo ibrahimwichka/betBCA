@@ -22,6 +22,8 @@ def create_tables():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL UNIQUE,
             password TEXT NOT NULL,
+            DOB TEXT,
+            security_q TEXT,
             points REAL DEFAULT 20.00
         )
     ''')
@@ -60,8 +62,8 @@ def insert_data():
     db = get_db_connection()
     cursor = db.cursor()
     cursor.execute('''
-        INSERT INTO users (username, password)
-        VALUES ('ibrahimwichka', 'ibrahim122'), ('bigboynate', 'naty'), ('soomark', 'markyoon')
+        INSERT INTO users (username, password, DOB, security_q)
+        VALUES ('ibrahimwichka', 'ibrahim122', '12/13/2006', 'Denver'), ('bigboynate', 'naty', '4/12/2007', 'New York'), ('soomark', 'markyoon', '10/11/2007', 'New York')
     ''')
     cursor.execute('''
         INSERT INTO bets('bet_topic', 'choice1', 'choice2', 'odds1', 'odds2', 'result')
@@ -71,7 +73,7 @@ def insert_data():
         ("Chile vs. Argentina ⚽\n(06/21/2024)", "Chile", "Argentina", +600, -500, "Bet Ongoing!"),
         ("Will Ibrahim get a buzzcut over the summer? 🧑‍🦲", "Yes", "No", -500, +700, "Bet Ongoing!"),
         ("Will Soo Young & Ibrahim cross 300 touchdowns in Lunch Football before high school ends? 🏈", "Yes", "No", -800, +200, "Bet Ongoing!"),
-        ("Will Yellow Win Soccer @ Field Day?", "Yes", "No", -100, +130, "Bet Ongoing!")
+        ("Will Yellow Win Tug of War on Field Day?", "Yes", "No", -100, +130, "Bet Ongoing!")
     ''')
     db.commit()
     db.close()

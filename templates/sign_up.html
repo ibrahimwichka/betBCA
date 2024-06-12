@@ -15,23 +15,14 @@
   <div class="container">
     <div class="card grey black">
       <div class="card-content">
-        <div class="center-align" style="margin-top: 50px; background-color: black; padding: 20px;">
-          <h1 class="animated-text">
-            The <span class="animated-text" style="color: #ffcc00; font-weight: bold;">#1 & Only</span> Betting App in <span class="animated-text" style="color: #ffcc00; font-weight: bold;">BCA!</span>
-          </h1>
-          <div class="animated-icons">
-            <i class="material-icons animated-icon">casino</i>
-            <i class="material-icons animated-icon">sports_esports</i>
-            <i class="material-icons animated-icon">emoji_events</i>
-          </div>
-        </div>
-        <span class="card-title center-align" style="color: white; font-weight: bold; font-size: 18px;">Sign In To Continue Your Journey!</span>
-        <form method="POST" action="/signin">
+        </br>
+        <span class="card-title center-align" style="color: white; font-weight: bold; font-size: 18px;">Input The Following Info! </span>
+        <form method="POST" action="/submit_sign_up">
           <div class="input-field">
             <input
               class="white-text"
-              id="username"
-              name="username"
+              id="username2"
+              name="username2"
               type="text"
               class="validate"
               required
@@ -41,27 +32,40 @@
           <div class="input-field">
             <input
               class="white-text"
-              id="password"
-              name="password"
-              type="password"
+              id="dob"
+              name="dob"
+              type="text"
+              class="validate"
+              required
+            />
+            <label for="dob"> Date of Birth: mm/dd/yyyy</label>
+          </div>
+          <div class="input-field">
+            <input
+              class="white-text"
+              id="password2"
+              name="password2"
+              type="text"
               class="validate"
               required
             />
             <label for="password">Password</label>
           </div>
+          <div class="input-field">
+            <input
+              class="white-text"
+              id="sec_question"
+              name="sec_question"
+              type="text"
+              class="validate"
+              required
+            />
+            <label for="sec_question"> Security Question: What city were you born in? </label>
+          </div>
           <div class="center-align">
             <button type="submit" class="btn waves-effect waves-light">
-              Sign In
-            </button>
-          </div>
-          </br>
-          <div class="center-align" style="margin-top: 20px;">
-            <span style="color: white;">Don't have an account?</span>
-            </br>
-          </br>
-            <a href="{{url_for("sign_up")}}" class="btn waves-effect waves-light yellow black-text">
               Sign Up
-            </a>
+            </button>
           </div>
         </form>
       </div>

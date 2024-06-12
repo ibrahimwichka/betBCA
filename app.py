@@ -2,11 +2,15 @@ import os
 from flask import Flask, render_template, request, redirect, session
 from flask_material import Material
 import sqlite3
+from cryptography.fernet import Fernet
+import base64
 
 app = Flask(__name__)
 Material(app)
 
 app.secret_key = os.urandom(24)
+key = base64.urlsafe_b64encode(os.urandom(32))
+cipher_suite = Fernet(key)
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -39,8 +43,28 @@ def signin():
             error = 'Invalid username or password.'
             return render_template('index.html', error=error)
 
-    return render_template('index.html')
+    return redirect('/')
 
+@app.route('/submit_sign_up', methods=['GET', 'POST'])
+def submit_sign_up():
+    if request.method == 'POST':
+        username = request.form['username2']
+        password = request.form['password2']
+        dob = request.form['dob']
+        sec_question = request.form['sec_question']
+
+        encrypted_pw = cipher_suite.encrypt(password.encode())
+        encrypted_sec_question = cipher_suite.encrypt(sec_question.encode())
+        db = get_db_connection()
+        cursor = db.cursor()
+        cursor.execute('''
+            INSERT INTO users (username, password, DOB, security_q)
+            VALUES (?, ?, ?, ?)''', (username, encrypted_pw , dob, encrypted_sec_question)
+        )
+        db.commit()
+        db.close()
+        return redirect('/')
+        
 @app.route('/your_bets')
 def your_bets():
     if 'username' in session:
@@ -109,7 +133,7 @@ def your_bets():
         
         return render_template('your_bets.html', logged_in=True, username=session['username'], user_points = user_points, level = level, user_bets= user_bets, user_bets2 = user_bets2)
     else:
-        return render_template('your_bets.html')
+        return redirect('/')
 
 @app.route('/all_bets')
 def all_bets():
@@ -149,7 +173,7 @@ def all_bets():
             bet_ids = bet_ids, bet_topics = bet_topics, choices_1 = choices_1, choices_2 = choices_2, odds_1 = odds_1, odds_2 = odds_2, results = results
         )
     else:
-        return render_template('all_bets.html')
+        return redirect('/')
 
 @app.route('/submit_bet', methods=['POST'])
 def submit_bet():
@@ -244,6 +268,11 @@ def profile():
         )
     else:
         return redirect('/')
+
+@app.route('/sign_up')
+def sign_up():
+    return render_template('sign_up.html')
+
 
 @app.route('/logout')
 def logout():
