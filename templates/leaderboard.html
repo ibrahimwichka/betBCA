@@ -20,7 +20,7 @@
     </header>
     <div class="container leaderboard-container">
         <div class="leaderboard">
-            <h2 class = "lead-head">Leaderboard</h2>
+            <h2 class = "lead-head"> Overall Leaderboard</h2>
             <ul>
                 {% for user in leaderboard %}
                 <li class="{% if user['id'] == current_user_id %}highlight{% endif %}">

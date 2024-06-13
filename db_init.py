@@ -63,17 +63,19 @@ def insert_data():
     cursor = db.cursor()
     cursor.execute('''
         INSERT INTO users (username, password, DOB, security_q)
-        VALUES ('ibrahimwichka', 'ibrahim122', '12/13/2006', 'Denver'), ('bigboynate', 'naty', '4/12/2007', 'New York'), ('soomark', 'markyoon', '10/11/2007', 'New York')
+        VALUES ('ibrahimwichka', 'ibrahim122', '12/13/2006', 'Denver'), ('bigboynate', 'naty', '4/12/2007', 'New York'), ('mark', 'markyoon', '10/11/2007', 'New York')
     ''')
     cursor.execute('''
-        INSERT INTO bets('bet_topic', 'choice1', 'choice2', 'odds1', 'odds2', 'result')
+        INSERT INTO bets('bet_topic', 'choice1', 'choice2', 'odds1', 'odds2', 'result', 'bet_category')
         VALUES 
-        ("Philadelphia Eagles vs. Kansas City Chiefs 🏈\n(06/19/2024)", "Eagles", "Chiefs", +200, -300, "Bet Ongoing!"),
-        ("Golden State Warriors vs. Boston Celtics 🏀\n(06/20/2024)", "Warriors", "Celtics", -800, +200, "Bet Ongoing!"),
-        ("Chile vs. Argentina ⚽\n(06/21/2024)", "Chile", "Argentina", +600, -500, "Bet Ongoing!"),
-        ("Will Ibrahim get a buzzcut over the summer? 🧑‍🦲", "Yes", "No", -500, +700, "Bet Ongoing!"),
-        ("Will Soo Young & Ibrahim cross 300 touchdowns in Lunch Football before high school ends? 🏈", "Yes", "No", -800, +200, "Bet Ongoing!"),
-        ("Will Yellow Win Tug of War on Field Day?", "Yes", "No", -100, +130, "Bet Ongoing!")
+        ("Philadelphia Eagles vs. Kansas City Chiefs 🏈\n(06/19/2024)", "Eagles", "Chiefs", +200, -300, "Bet Ongoing!", "Sports: Football"),
+        ("Golden State Warriors vs. Boston Celtics 🏀\n(06/20/2024)", "Warriors", "Celtics", -800, +200, "Bet Ongoing!", "Sports: Basketball"),
+        ("Chile vs. Argentina ⚽\n(06/21/2024)", "Chile", "Argentina", +600, -500, "Bet Ongoing!", "Sports: Soccer"),
+        ("Will Ibrahim get a buzzcut over the summer? 🧑‍🦲", "Yes", "No", -500, +700, "Bet Ongoing!", "Stuff About Ibrahim"),
+        ("Will Soo Young & Ibrahim cross 350 touchdowns in Lunch Football before high school ends? 🏈", "Yes", "No", -800, +200, "Bet Ongoing!", "BCA Lunch Football"),
+        ("Will Yellow or Blue Win Tug of War on Field Day?", "Yellow", "Blue", -100, +130, "Bet Ongoing!", "Field Day"),
+        ("Is Mudasir gonna go into CompSci or Engineering", "CompSci", "Engineering", +200, -180, "Bet Ongoing!", "Stuff about Mudasir"),
+        ("How many students will get into the Ivy League schools in 2025", "<50", ">50", -300, +200, "Bet Ongoing!", "BCA College Admissions")
     ''')
     db.commit()
     db.close()

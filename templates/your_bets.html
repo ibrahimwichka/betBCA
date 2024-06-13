@@ -74,6 +74,26 @@
               </div>
           </div>
           {% endfor %}
+          {% for lb in user_bets2_leaderboards %}
+          <div class="col s12 m6 l6">
+              <div class="card blue-grey darken-4">
+                  <div class="card-content white-text">
+                    <div class="leaderboard">
+                      <h2 style = "font-size: 18px;"> Worldwide Earnings </h2>
+                      <ul>
+                          {% for row in lb %}
+                          <li>
+                              <span class="rank">{{ loop.index }}</span>
+                              <span class="user-name">{{ row[0] }}</span>
+                              <span class="points"> {{row[1]}} 💵 </span>
+                          </li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
       </div>
     </div>
     <div class="news-banner-container">

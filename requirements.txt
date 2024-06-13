@@ -1,4 +1,3 @@
 flask
 flask_material
 sqlite3
-cryptography

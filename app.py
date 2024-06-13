@@ -1,16 +1,19 @@
 import os
 from flask import Flask, render_template, request, redirect, session
+from jinja2 import Environment
 from flask_material import Material
 import sqlite3
-from cryptography.fernet import Fernet
-import base64
+# from cryptography.fernet import Fernet
+# import base64
 
 app = Flask(__name__)
 Material(app)
 
+app.jinja_env.globals.update(zip=zip)
+
 app.secret_key = os.urandom(24)
-key = base64.urlsafe_b64encode(os.urandom(32))
-cipher_suite = Fernet(key)
+# key = base64.urlsafe_b64encode(os.urandom(32))
+# cipher_suite = Fernet(key)
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -35,7 +38,8 @@ def signin():
         cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
         user = cursor.fetchone()
         db.close()
-        if user and password == user['password']:
+        if user and password == (user['password']):
+            print(username + " signed in!")
             session['username'] = username
             session['user_id'] = user['id']
             return redirect('/your_bets')
@@ -53,20 +57,42 @@ def submit_sign_up():
         dob = request.form['dob']
         sec_question = request.form['sec_question']
 
-        encrypted_pw = cipher_suite.encrypt(password.encode())
-        encrypted_sec_question = cipher_suite.encrypt(sec_question.encode())
         db = get_db_connection()
         cursor = db.cursor()
         cursor.execute('''
             INSERT INTO users (username, password, DOB, security_q)
-            VALUES (?, ?, ?, ?)''', (username, encrypted_pw , dob, encrypted_sec_question)
+            VALUES (?, ?, ?, ?)''', (username, password , dob, sec_question)
         )
         db.commit()
         db.close()
         return redirect('/')
+
+@app.route('/submit_pw_change', methods=['GET', 'POST'])
+def submit_pw_change():
+    if request.method == 'POST':
+        username3 = request.form['username3']
+        sec_question = request.form['sec_question2']
+        new_pw = request.form["new_pw"]
+
+
+        db = get_db_connection()
+        cursor = db.cursor()
+
+        cursor.execute('''SELECT username, security_q from users where username = ?''', (username3,))
+        check_sec = cursor.fetchone()['security_q']
+        print(check_sec)
+        if (check_sec == sec_question):
+            cursor.execute('''
+            UPDATE users SET password = ? WHERE username = ?''', (new_pw, username3,)
+            )
+            db.commit()
+            db.close()
+            return redirect('/')
+        return redirect('/forgot_pw')
         
 @app.route('/your_bets')
 def your_bets():
+    # print(session['username'])
     if 'username' in session:
         db = get_db_connection()
         cursor = db.cursor()
@@ -117,6 +143,20 @@ def your_bets():
             WHERE ub.user_id = ? and b.result != "Bet Ongoing!"
         ''', (session['user_id'],))
         user_bets2 = cursor.fetchall()
+
+        user_bets2_leaderboards = []
+        for bet in user_bets2:
+            cursor.execute(
+                '''SELECT username, user_bets.earned 
+                FROM users JOIN user_bets ON users.id = user_bets.user_id 
+                WHERE user_bets.bet_id = ? 
+                ORDER BY user_bets.earned DESC
+                LIMIT 5'''
+                , (bet['bet_id'],)
+            )
+            leaderboard_bet = cursor.fetchall()
+            user_bets2_leaderboards.append(leaderboard_bet)
+            
         
         if (user_points < 100):
             level = "Beginner Level 😬"
@@ -130,9 +170,10 @@ def your_bets():
             level = "Legendary 🦄"
         db.commit()
         db.close()
-        
-        return render_template('your_bets.html', logged_in=True, username=session['username'], user_points = user_points, level = level, user_bets= user_bets, user_bets2 = user_bets2)
+       
+        return render_template('your_bets.html', logged_in=True, username=session['username'], user_points = round(user_points,2) , level = level, user_bets= user_bets, user_bets2 = user_bets2, user_bets2_leaderboards = user_bets2_leaderboards)
     else:
+        print("it happened")
         return redirect('/')
 
 @app.route('/all_bets')
@@ -169,10 +210,11 @@ def all_bets():
         return render_template(
             'all_bets.html', 
             logged_in=True, 
-            username=session['username'], user_points=user_points, level = level,
+            username=session['username'], user_points= round(user_points, 2), level = level,
             bet_ids = bet_ids, bet_topics = bet_topics, choices_1 = choices_1, choices_2 = choices_2, odds_1 = odds_1, odds_2 = odds_2, results = results
         )
     else:
+        print("Happened")
         return redirect('/')
 
 @app.route('/submit_bet', methods=['POST'])
@@ -223,7 +265,7 @@ def get_reward():
         cursor.execute('''SELECT points FROM users WHERE username = ?''', (session['username'],))
         user_points = cursor.fetchone()['points']
 
-        cursor.execute('UPDATE users SET points = ? WHERE username = ?', (user_points+amount, session['username']))
+        cursor.execute('UPDATE users SET points = ? WHERE username = ?', (round(user_points+amount, 2), session['username']))
         cursor.execute('UPDATE user_bets SET status = "redeemed" WHERE user_bet_id = ?', (user_bet_id_get,))
 
         db.commit()
@@ -279,5 +321,15 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
+@app.route('/forgot_pw')
+def forgot_pw():
+    return render_template("forgot_pw.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
