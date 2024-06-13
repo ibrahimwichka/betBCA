@@ -20,3 +20,6 @@ def checkMinimumBet(userBet):
         if userBet >= 0.10:
             return True
         return False
+
+def kjasdfjaewko():
+    return "yes"
